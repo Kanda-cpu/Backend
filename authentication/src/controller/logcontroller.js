@@ -15,7 +15,6 @@ const logcontroller = async (req, res) => {
     }
 
     const validpass = await bcrpt.compare(loginpass, user.password);
-    console.log(validpass);
 
     if (!validpass) {
       return res.status(404).json({
@@ -27,13 +26,24 @@ const logcontroller = async (req, res) => {
       userid: user._id,
       email: user.email,
     });
+    // console.log("Refresh token -> ", refreshtoken);
+    // console.log("Access token -> ", accesstoken);
 
-    console.log("Access token -> ", accesstoken);
-    console.log("Refresh token -> ", refreshtoken);
+    // set the refreshtoken in the cookie
 
-    await usermodel.findOneAndUpdate(user._id, {
-      refreshtoken: refreshtoken,
+    res.cookie("refreh_token", refreshtoken, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
+    // update the refreshtoken in the database
+    // await usermodel.findOneAndUpdate({
+    //   _id: user._id,
+    // },{refreshtoken:refreshtoken});
+
+    // we already have the users data so we can add it directly to the users doc
+    user.refreshtoken = await bcrpt.hash(refreshtoken, 12);
+    await user.save();
 
     res.status(200).json({
       message: "Logged in successfully",

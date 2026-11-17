@@ -13,7 +13,7 @@ const regusercontroller = async (req, res) => {
     const existinguser = await usermodel.findOne({ email });
 
     if (existinguser) {
-      return res.status(201).json({
+      return res.status(409).json({
         message: "User already exist",
       });
     }
@@ -31,7 +31,7 @@ const regusercontroller = async (req, res) => {
 
     console.log(accesstoken);
 
-    res.status(200).json({
+    res.status(201).json({
       message: "User registered succesfully",
       accesstoken: accesstoken,
     });

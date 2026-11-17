@@ -5,6 +5,6 @@ import logcontroller from "../controller/logcontroller.js";
 const router = express.Router();
 
 router.post("/reg", regusercontroller);
-router.post("/login", authenticateuser, logcontroller);
+router.post("/login", logcontroller);
 
 export default router;
