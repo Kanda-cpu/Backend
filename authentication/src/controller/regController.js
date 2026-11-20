@@ -24,16 +24,8 @@ const regusercontroller = async (req, res) => {
       password: await bcrypt.hash(password, 12),
     });
 
-    const { accesstoken } = generatetoken({
-      userId: newuser._id,
-      email: newuser.email,
-    });
-
-    console.log(accesstoken);
-
     res.status(201).json({
       message: "User registered succesfully",
-      accesstoken: accesstoken,
     });
   } catch (error) {
     res.status(401).json({

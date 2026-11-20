@@ -17,7 +17,7 @@ const logcontroller = async (req, res) => {
     const validpass = await bcrpt.compare(loginpass, user.password);
 
     if (!validpass) {
-      return res.status(404).json({
+      return res.status(401).json({
         message: "Invalid email or password",
       });
     }

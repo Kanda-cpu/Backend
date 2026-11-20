@@ -3,7 +3,7 @@ import usermodel from "../model/usermodel.js";
 const mecontroller = async (req, res) => {
   try {
     // we have to access the userid becaues we have sent the userid in the payload at thr time of the token generation (req.user.userid)
-    const user = usermodel.findById(req.user.userid);
+    const user = await usermodel.findById(req.user.userid);
 
     if (!user) {
       return res.status(401).json({
@@ -23,6 +23,7 @@ const mecontroller = async (req, res) => {
         message: "User Found",
         user: {
           id: req.user.userid,
+          name: user.username,
           email: req.user.email,
         },
       });
