@@ -3,10 +3,12 @@ import regusercontroller from "../controller/regController.js";
 import logcontroller from "../controller/logcontroller.js";
 import authmiddleware from "../middleware/middleware.js";
 import mecontroller from "../controller/mecontroller.js";
+import refreshcontroller from "../controller/refreshcontroller.js";
 const router = express.Router();
 
 router.post("/reg", regusercontroller);
 router.post("/login", logcontroller);
 router.get("/me", authmiddleware, mecontroller);
+router.post("/refresh", refreshcontroller);
 
 export default router;

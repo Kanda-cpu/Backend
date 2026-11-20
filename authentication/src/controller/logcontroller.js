@@ -31,7 +31,7 @@ const logcontroller = async (req, res) => {
 
     // set the refreshtoken in the cookie
 
-    res.cookie("refreh_token", refreshtoken, {
+    res.cookie("refresh_token", refreshtoken, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });

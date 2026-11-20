@@ -11,7 +11,7 @@ const mecontroller = async (req, res) => {
       });
     }
 
-    console.log("User details -> ", req.user.userid, "\n", req.user.email);
+    // console.log("User details -> ", req.user.userid, "\n", req.user.email);
 
     //     const accesstoken = generatetoken({
     //   userid: user._id,
